@@ -21,9 +21,17 @@
 #include <iostream>
 #include <string>
 
+/**
+ * @brief The SysUtils class A utility class to do some system related activities
+ */
 class SysUtils
 {
 public:
+    /**
+     * @brief getMACAddress Returns the MAC Address of a particular Interface
+     * @param aInterfaceName Interface Name to be which MACID is requested
+     * @return The Mac Address on Success , if not empty string
+     */
     static std::string getMACAddress(const std::string &aInterfaceName);
 };
 

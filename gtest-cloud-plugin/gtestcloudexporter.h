@@ -22,10 +22,21 @@
 #include <iostream>
 #include <string>
 
+/**
+ * @brief The GTestCloudExporter class
+ */
 class GTestCloudExporter: public ::testing::EmptyTestEventListener
 {
 public:
+    /**
+     * @brief GTestCloudExporter Constructor
+     * @param aUserName UserName  which is used to access the webserver
+     * @param aNetworkInterfaceName Primary Network InterfaceName used
+     */
     GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName);
+
+    //Overriden from Listner
+protected:
     virtual void OnTestStart(const ::testing::TestInfo& test_info);
     virtual void OnTestPartResult(const ::testing::TestPartResult& test_part_result);
     virtual void OnTestEnd(const ::testing::TestInfo& test_info);

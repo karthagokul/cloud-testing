@@ -22,6 +22,6 @@ int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     ::testing::TestEventListeners& listeners = ::testing::UnitTest::GetInstance()->listeners();
     delete listeners.Release(listeners.default_result_printer());
-    listeners.Append(new GTestCloudExporter("gokul","eth0"));
+    listeners.Append(new GTestCloudExporter("kartha.gokul@gmail.com","eth0"));
     return RUN_ALL_TESTS();
 }

@@ -26,13 +26,26 @@
 
 std::string SysUtils::getMACAddress(const std::string &aInterfaceName)
 {
+
+#ifdef _WIN32
+
+    std::cerr<<"Platform not supported"<<std::endl;
+    return std::string();
+
+#elif __APPLE__
+
+    std::cerr<<"Platform not supported"<<std::endl;
+    return std::string();
+
+#else //Assumes that the remaining flavours are unix / linux and let's support it
+
     struct ifreq ifr;
     int sock, j, k;
     char *p, addr[32], mask[32], mac[32];
     sock=socket(PF_INET, SOCK_STREAM, 0);
     if (-1==sock) {
         perror("socket() ");
-        return std::string("");
+        return std::string();
     }
     strncpy(ifr.ifr_name,aInterfaceName.c_str(),sizeof(ifr.ifr_name)-1);
     ifr.ifr_name[sizeof(ifr.ifr_name)-1]='\0';
@@ -40,7 +53,7 @@ std::string SysUtils::getMACAddress(const std::string &aInterfaceName)
 
     if (-1==ioctl(sock, SIOCGIFADDR, &ifr)) {
         perror("ioctl(SIOCGIFADDR) ");
-        return std::string("");
+        return std::string();
     }
     p=inet_ntoa(((struct sockaddr_in *)(&ifr.ifr_addr))->sin_addr);
     strncpy(addr,p,sizeof(addr)-1);
@@ -49,7 +62,7 @@ std::string SysUtils::getMACAddress(const std::string &aInterfaceName)
 
     if (-1==ioctl(sock, SIOCGIFNETMASK, &ifr)) {
         perror("ioctl(SIOCGIFNETMASK) ");
-        return std::string("");
+        return std::string();
     }
     p=inet_ntoa(((struct sockaddr_in *)(&ifr.ifr_netmask))->sin_addr);
     strncpy(mask,p,sizeof(mask)-1);
@@ -58,7 +71,7 @@ std::string SysUtils::getMACAddress(const std::string &aInterfaceName)
 
     if (-1==ioctl(sock, SIOCGIFHWADDR, &ifr)) {
         perror("ioctl(SIOCGIFHWADDR) ");
-        return std::string("");
+        return std::string();
     }
     for (j=0, k=0; j<6; j++) {
         k+=snprintf(mac+k, sizeof(mac)-k-1, j ? ":%02X" : "%02X",
@@ -77,4 +90,5 @@ std::string SysUtils::getMACAddress(const std::string &aInterfaceName)
     close(sock);
     return std::string(mac);
 
+#endif
 }
