@@ -15,7 +15,9 @@ else {
 }
 
 SOURCES += \
-    gtestcloudexporter.cpp
+    gtestcloudexporter.cpp \
+    sysutils.cpp
 
 HEADERS += \
-    gtestcloudexporter.h
+    gtestcloudexporter.h \
+    sysutils.h

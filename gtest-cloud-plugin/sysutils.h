@@ -15,26 +15,16 @@
 *
 **/
 
-#ifndef GTESTCLOUDEXPORTER_H
-#define GTESTCLOUDEXPORTER_H
+#ifndef SYSUTILS_H
+#define SYSUTILS_H
 
-#include <gtest/gtest.h>
 #include <iostream>
 #include <string>
 
-class GTestCloudExporter: public ::testing::EmptyTestEventListener
+class SysUtils
 {
 public:
-    GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName);
-    virtual void OnTestStart(const ::testing::TestInfo& test_info);
-    virtual void OnTestPartResult(const ::testing::TestPartResult& test_part_result);
-    virtual void OnTestEnd(const ::testing::TestInfo& test_info);
-
-private:
-    int mSuccessCount;
-    int mFailedCount;
-    std::string mUserName;
-    std::string mDeviceId;
+    static std::string getMACAddress(const std::string &aInterfaceName);
 };
 
-#endif // GTESTCLOUDEXPORTER_H
+#endif // SYSUTILS_H

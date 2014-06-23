@@ -16,16 +16,28 @@
 **/
 
 #include "gtestcloudexporter.h"
-#include <iostream>
+#include "sysutils.h"
 
-GTestCloudExporter::GTestCloudExporter():
-    mSuccessCount(0),mFailedCount(0)
+GTestCloudExporter::GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName):
+    mSuccessCount(0),mFailedCount(0),mUserName(aUserName)
 {
+    mDeviceId=SysUtils::getMACAddress(aNetworkInterfaceName);
+    if(mDeviceId.empty())
+    {
+        std::cerr<<"Device ID Is Empty "<<std::endl;
+    }
+    else
+    {
+        std::cout<<"-----------------------------------"<<std::endl;
+        std::cout<<"UserName : "<<mUserName<<std::endl;
+        std::cout<<"Device ID : "<<mDeviceId<<std::endl;
+        std::cout<<"-----------------------------------"<<std::endl;
+    }
 }
 
 void GTestCloudExporter::OnTestStart(const ::testing::TestInfo& test_info)
 {
-    std::cout<<"Running\t"<<test_info.test_case_name()<<"::"<<test_info.name()<<std::endl;
+    //std::cout<<"Running\t"<<test_info.test_case_name()<<"::"<<test_info.name()<<std::endl;
 }
 
 void GTestCloudExporter::OnTestPartResult(const ::testing::TestPartResult& test_part_result)
@@ -36,15 +48,15 @@ void GTestCloudExporter::OnTestPartResult(const ::testing::TestPartResult& test_
 
 void GTestCloudExporter::OnTestEnd(const ::testing::TestInfo& test_info)
 {
+    std::cout<<test_info.test_case_name()<<"::"<<test_info.name()<<"\t";
     if(test_info.result()->Passed())
     {
-        std::cout<<"Succeeded"<<std::endl;
+        std::cout<<"[Succeeded]"<<std::endl;
         mSuccessCount++;
     }
     else
     {
-        std::cerr<<"Failed:"<<std::endl;
+        std::cerr<<"[Failed]"<<std::endl;
         mFailedCount++;
     }
-    std::cout<<"Ended\t"<<test_info.test_case_name()<<"::"<<test_info.name()<<std::endl;
 }
