@@ -20,12 +20,18 @@
 
 #include <cmath>
 
+template<typename Type>
 class Calculator
 {
 public:
-    double cubic(double d)
+    Type cubic(Type d)
     {
         return pow(d,3);
+    }
+
+    Type multiply(Type a,Type b)
+    {
+        return a*b;
     }
 };
 

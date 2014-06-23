@@ -18,8 +18,20 @@
 #include "gtest/gtest.h"
 #include "calculator.h"
 
-TEST(CalculatorTest, cubictest)
+TEST(CalculatorTest, cublic)
 {
-    Calculator c;
-    EXPECT_EQ(1000, c.cubic(10));
+    Calculator<int> c1;
+    EXPECT_EQ(1000, c1.cubic(10));
+
+    Calculator<float> c2;
+    EXPECT_EQ(1000.00, c2.cubic(10.00));
+}
+
+TEST(CalculatorTest, multiply)
+{
+    Calculator<int> c1;
+    EXPECT_EQ(200, c1.multiply(10,20));
+
+    Calculator<float> c2;
+    EXPECT_EQ(1000.00, c2.multiply(10,35));
 }
