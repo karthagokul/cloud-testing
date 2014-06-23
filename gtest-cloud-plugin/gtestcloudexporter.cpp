@@ -19,7 +19,7 @@
 #include "sysutils.h"
 
 GTestCloudExporter::GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName):
-    mSuccessCount(0),mFailedCount(0),mUserName(aUserName)
+    mSuccessCount(0),mFailedCount(0),mUserName(aUserName),mCloudEngine(0)
 {
     mDeviceId=SysUtils::getMACAddress(aNetworkInterfaceName);
     if(mDeviceId.empty())
@@ -33,6 +33,26 @@ GTestCloudExporter::GTestCloudExporter(const std::string &aUserName,const std::s
         std::cout<<"Device ID : "<<mDeviceId<<std::endl;
         std::cout<<"-----------------------------------"<<std::endl;
     }
+
+}
+
+GTestCloudExporter::~GTestCloudExporter()
+{
+    //std::cout<<__PRETTY_FUNCTION__<<std::endl;
+    if(mCloudEngine)
+    {
+        delete mCloudEngine;
+        mCloudEngine=0;
+    }
+}
+
+bool GTestCloudExporter::init()
+{
+    //  std::cout<<__PRETTY_FUNCTION__<<std::endl;
+    if(mCloudEngine) return false;
+
+    mCloudEngine=new CloudClientEngine(this);
+    return true;
 }
 
 void GTestCloudExporter::OnTestStart(const ::testing::TestInfo& test_info)
@@ -61,4 +81,9 @@ void GTestCloudExporter::OnTestEnd(const ::testing::TestInfo& test_info)
         std::cerr<<"[Failed]"<<std::endl;
         mFailedCount++;
     }
+}
+
+void GTestCloudExporter::onCloudClientError(const CloudClientEngineError &aStatus , const std::string &aErrorMessage)
+{
+
 }

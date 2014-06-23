@@ -8,7 +8,7 @@ isEmpty(_GTEST_HOME) {
 }
 else {
    message(Using GTest from $$_GTEST_HOME)
-   LIBS+= -L$$_GTEST_HOME/libs -lgtest
+   LIBS+= -L$$_GTEST_HOME/lib -lgtest
    INCLUDEPATH += $$_GTEST_HOME/include/
 }
 
