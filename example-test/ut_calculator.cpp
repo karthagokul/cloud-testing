@@ -4,5 +4,5 @@
 TEST(CalculatorTest, cubictest)
 {
     Calculator c;
-    EXPECT_EQ(10010, c.cubic(10));
+    EXPECT_EQ(1000, c.cubic(10));
 }

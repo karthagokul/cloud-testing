@@ -27,6 +27,10 @@ public:
     virtual void OnTestStart(const ::testing::TestInfo& test_info);
     virtual void OnTestPartResult(const ::testing::TestPartResult& test_part_result);
     virtual void OnTestEnd(const ::testing::TestInfo& test_info);
+
+private:
+    int mSuccessCount;
+    int mFailedCount;
 };
 
 #endif // GTESTCLOUDEXPORTER_H
