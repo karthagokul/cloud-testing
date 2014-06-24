@@ -1,5 +1,7 @@
 <?php
 
+include_once('./constants.php');
+
 /** Updates the database with the data
  * @param string $userId User ID
  * @param string $machineId Machine ID
@@ -7,11 +9,7 @@
  */
 function UpdateDataBase($userId, $machineId, $successrate, $country) {
 
-    $DBServer = 'localhost'; // e.g 'localhost' or '192.168.1.100'
-    $DBUser = 'root';
-    $DBPass = '';
-    $DBName = 'gtest_cloud';
-
+    global $DBServer, $DBName, $DBUser, $DBPass;
     $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
     // check connection
     if ($conn->connect_error) {
@@ -29,7 +27,7 @@ function UpdateDataBase($userId, $machineId, $successrate, $country) {
 
     $conn->autocommit(TRUE);
     $conn->close();
-    
+
     echo "Success";
     echo "<br>";
     echo $userId;

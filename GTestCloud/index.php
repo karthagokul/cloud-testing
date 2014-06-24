@@ -29,10 +29,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        $DBServer = 'localhost'; // e.g 'localhost' or '192.168.1.100'
-        $DBUser = 'root';
-        $DBPass = '';
-        $DBName = 'gtest_cloud';
+        include_once('./constants.php');
+        global $DBServer, $DBName, $DBUser, $DBPass;
         $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
 
         if ($conn->connect_error) {
