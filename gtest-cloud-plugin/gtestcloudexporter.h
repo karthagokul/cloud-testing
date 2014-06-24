@@ -39,6 +39,7 @@ public:
     GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName);
     ~GTestCloudExporter();
     bool init();
+    bool submit();
 
 
     //Overriden from Listner

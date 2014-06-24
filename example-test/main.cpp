@@ -32,5 +32,13 @@ int main(int argc, char** argv) {
 
     listeners.Append(cloudexpo);
 
-    return RUN_ALL_TESTS();
+    int value=RUN_ALL_TESTS();
+
+    if(!cloudexpo->submit())
+    {
+        std::cerr<<"Failed to Submit the data to server"<<std::endl;
+        return -1;
+    }
+
+    return value;
 }
