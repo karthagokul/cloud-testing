@@ -22,6 +22,7 @@
 #include <iostream>
 #include <string>
 
+#include "constants.h"
 #include "cloudclientengine.h"
 
 
@@ -55,6 +56,9 @@ private:
     std::string mUserName;
     std::string mDeviceId;
     CloudClientEngine *mCloudEngine;
+
+    GTestResults mResultsTable;
+
 };
 
 #endif // GTESTCLOUDEXPORTER_H

@@ -22,4 +22,5 @@ SOURCES += \
 HEADERS += \
     gtestcloudexporter.h \
     sysutils.h \
-    cloudclientengine.h
+    cloudclientengine.h \
+    constants.h

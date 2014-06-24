@@ -58,35 +58,41 @@ bool GTestCloudExporter::init()
 void GTestCloudExporter::OnTestStart(const ::testing::TestInfo& test_info)
 {
     //std::cout<<"Running\t"<<test_info.test_case_name()<<"::"<<test_info.name()<<std::endl;
+    std::string name=std::string(test_info.test_case_name());
+    name.append("::");
+    name.append(std::string(test_info.name()));
+    mResultsTable.addNew(name);
 }
 
 void GTestCloudExporter::OnTestPartResult(const ::testing::TestPartResult& test_part_result)
 {
-    std::cerr<<std::endl;
-    std::cerr<<test_part_result.file_name()<<" Line Number : "<<test_part_result.line_number()<<std::endl;
-    std::cerr<<test_part_result.summary()<<std::endl;
-    std::cerr<<std::endl;
+//    std::cerr<<std::endl;
+//    std::cerr<<test_part_result.file_name()<<" Line Number : "<<test_part_result.line_number()<<std::endl;
+//    std::cerr<<test_part_result.summary()<<std::endl;
+//    std::cerr<<std::endl;
+
+    if(!mResultsTable.appendDetails(test_part_result.summary()))
+    {
+        std::cerr<<"Unable to Append";
+        exit;
+    }
 }
 
 void GTestCloudExporter::OnTestEnd(const ::testing::TestInfo& test_info)
 {
-    std::cout<<test_info.test_case_name()<<"::"<<test_info.name()<<"\t";
-    if(test_info.result()->Passed())
-    {
-        std::cout<<"[Succeeded]"<<std::endl;
-        mSuccessCount++;
-    }
-    else
-    {
-        std::cerr<<"[Failed]"<<std::endl;
-        mFailedCount++;
-    }
+    //std::cout<<test_info.test_case_name()<<"::"<<test_info.name()<<"\t";
+    mResultsTable.updateSuccess(test_info.result()->Passed());
 
 }
 
 bool GTestCloudExporter::submit()
 {
-    return mCloudEngine->submit();
+    mResultsTable.print();
+    bool status=true;
+
+    //status=mCloudEngine->submit();
+
+    return status;
 }
 
 void GTestCloudExporter::onCloudClientError(const CloudClientEngineError &aStatus , const std::string &aErrorMessage)
