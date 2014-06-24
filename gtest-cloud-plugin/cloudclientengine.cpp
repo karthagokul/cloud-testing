@@ -17,6 +17,8 @@
 
 #include "cloudclientengine.h"
 
+#include <stdio.h>
+
 #define USE_CURL
 
 #ifdef USE_CURL
@@ -38,9 +40,17 @@ bool CloudClientEngine::submit()
     curl_global_init(CURL_GLOBAL_ALL);
     CURL *curl = curl_easy_init();
     CURLcode res;
+
     if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL,SERVER_URI);
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel&project=curl");
+
+        char *data=SERVER_URI;
+        char urlstr[4096];
+        sprintf(urlstr,data,"kartha","44:37:e6:68:96:0c",100);
+
+        std::cout<<urlstr<<std::endl;
+
+        curl_easy_setopt(curl, CURLOPT_URL,urlstr);
+
         res = curl_easy_perform(curl);
         if(res != CURLE_OK)
         {

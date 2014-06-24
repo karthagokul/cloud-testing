@@ -81,6 +81,14 @@ void GTestCloudExporter::OnTestEnd(const ::testing::TestInfo& test_info)
         std::cerr<<"[Failed]"<<std::endl;
         mFailedCount++;
     }
+    //Testing
+    if(!mCloudEngine->submit())
+    {
+        std::cerr<<"Error in uploading data to server "<<std::endl;
+    }
+    else {
+       std::cout<<"Successfully Submited!";
+    }
 }
 
 void GTestCloudExporter::onCloudClientError(const CloudClientEngineError &aStatus , const std::string &aErrorMessage)

@@ -21,7 +21,7 @@
 #include <iostream>
 #include <string>
 
-#define SERVER_URI "http://localhost/gtest-server"
+#define SERVER_URI "http://10.254.84.103/GTestCloud/updater.php?userid=%s&&machineid=%s&&successrate=%d"
 
 enum CloudClientEngineError
 {
