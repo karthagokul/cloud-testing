@@ -25,3 +25,15 @@ and open the template in the editor.
 .status-metro.status-fair {
     background: #999999;
 }
+.boldme {
+font-weight:bold;
+}
+.italicme {
+font-style:italic;
+}
+.iambigger {
+font-size:150%;
+}
+.colormered {
+color:#FF0000;
+}

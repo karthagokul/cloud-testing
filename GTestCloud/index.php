@@ -9,12 +9,22 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>GCloud</title>
         <link href="index_style.css" rel="stylesheet" type="text/css" />
-        <link href="scripts/FooTable/css/footable.core.css" rel="stylesheet" type="text/css" />
-        <link href="scripts/FooTable/css/footable.standalone.css" rel="stylesheet" type="text/css" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
-        <script src="scripts/FooTable/js/footable.js" type="text/javascript"></script>
-        <script src="scripts/FooTable/js/footable.paginate.js" type="text/javascript"></script>
-        <script src="scripts/FooTable/js/footable.sort.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+        <!-- DataTables -->
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(
+                    function() {
+                        $('#global_data').DataTable();
+                    }
+            )
+        </script>
 
     </head>
     <body>
@@ -39,75 +49,79 @@ and open the template in the editor.
         }
         //
         ?>
-        <table class="footable metro-blue" data-page-size="5">
-            <!-- Table Header -->
-            <thead>
-               <tr>
-                    <th data-type="alpha">
-                        User
-                    </th>
-                    <th data-type="alpha">
-                        Machine Id
-                    </th>
-                    <th data-type="numeric" data-sort-initial="true">
-                        Success Rate
-                    </th>
-                </tr>
+    <center><span class="boldme iambigger colormered"> Recent Entries </span></center>
+    <table id="global_data" class="display">
+        <!-- Table Header -->
+        <thead>
+            <tr>
+                <th align="left">
+                    User
+                </th>
+                <th align="left">
+                    Machine Id
+                </th>
+                <th align="left">
+                    Country
+                </th>
+                <th align="left" data-type="numeric">
+                    Success Rate
+                </th>
+                <th align="left" data-type="numeric">
+                    Date
+                </th>
+            </tr>
 
-            </thead>
-            <!-- Table Header -->
-            <tbody>
-                <?php
-                $rs->data_seek(0);
-                while ($row = $rs->fetch_assoc()) {
-                    //echo $row['col1'] . '<br>';
-                    $userId = $row['userid'];
-                    $machineId = $row['machineid'];
-                    $successRate = $row['successrate'];
-                    ?>
-                    <tr>
-                        <td>
-                            <?php echo $userId; ?>
-                        </td>
-                        <td>
-                            <?php echo $machineId; ?>
-                        </td>
-                        <?php 
-                        if($successRate==100)
-                        {
-                            echo "<td data-value='$successRate'> <span class='status-metro  status-good' title='Disabled'>Excellent</span>";
-                        }
-                        else if(($successRate>90)&&($successRate<99))
-                        {                            
-                            echo "<td data-value='$successRate'> <span class='status-metro status-fair' title='Disabled'>Fair</span>";
-                        }
-                        else
-                        {
-                            echo "<td data-value='$successRate'> <span class='status-metro status-bad' title='Disabled'>Bad</span>";
-                        }
-                        echo " [ ";
-                        echo $successRate;
-                        echo "% ] ";
-                        ?>
-                        </td>
-                    </tr>
-                    <?php
-                }
-                $conn->close();
+        </thead>
+        <!-- Table Header -->
+        <tbody>
+            <?php
+            $rs->data_seek(0);
+            while ($row = $rs->fetch_assoc()) {
+                //echo $row['col1'] . '<br>';
+                $userId = $row['userid'];
+                $machineId = $row['machineid'];
+                $country = $row['country'];
+                $successRate = $row['successrate'];
+                $update_date = $row['update_date'];
                 ?>
-            </tbody>
-            <tfoot>
                 <tr>
-                    <td colspan="5">
-                        <div class="pagination pagination-centered"></div>
+                    <td>
+                        <?php echo $userId; ?>
+                    </td>
+                    <td>
+                        <?php echo $machineId; ?>
+                    </td>
+                    <td>
+                        <?php echo $country; ?>
+                    </td>
+                    <?php
+                    if ($successRate == 100) {
+                        echo "<td data-value='$successRate'> <span class='status-metro  status-good' title='Disabled'>Very Good</span>";
+                    } else if (($successRate > 90) && ($successRate < 99)) {
+                        echo "<td data-value='$successRate'> <span class='status-metro status-fair' title='Disabled'>Good</span>";
+                    } else {
+                        echo "<td data-value='$successRate'> <span class='status-metro status-bad' title='Disabled'>Bad</span>";
+                    }
+                    echo " [ ";
+                    echo $successRate;
+                    echo "% ] ";
+                    ?>
+                    </td>
+                    <td>
+                        <?php echo $update_date; ?>
                     </td>
                 </tr>
-            </tfoot>
-<script type="text/javascript">
-    $(function () {
-        $('table').footable();
-    });
-</script>
-
+                <?php
+            }
+            $conn->close();
+            ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div class="pagination pagination-centered"></div>
+                </td>
+            </tr>
+        </tfoot>
     </body>
 </html>

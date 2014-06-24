@@ -5,7 +5,7 @@
  * @param string $machineId Machine ID
  * @param string $successrate Unit Test Success Rate
  */
-function UpdateDataBase($userId, $machineId, $successrate) {
+function UpdateDataBase($userId, $machineId, $successrate, $country) {
 
     $DBServer = 'localhost'; // e.g 'localhost' or '192.168.1.100'
     $DBUser = 'root';
@@ -18,8 +18,8 @@ function UpdateDataBase($userId, $machineId, $successrate) {
         trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);
         exit;
     }
-
-    $sql = "INSERT INTO test_data (userid, machineid,successrate) VALUES ('$userId','$machineId','$successrate')";
+    $date = date('Y-m-d H:i:s');
+    $sql = "INSERT INTO test_data (userid, machineid,successrate,country,update_date) VALUES ('$userId','$machineId','$successrate','$country','$date')";
     $rs = $conn->query($sql);
 
     if ($rs === false) {
@@ -27,25 +27,27 @@ function UpdateDataBase($userId, $machineId, $successrate) {
         exit;
     }
 
-    echo "SuccessFully Updated";
-    echo "<br>";
-    echo "Summary";
-    echo "<br>";
-    echo $userId;
-    echo "<br>";
-    echo $machineId;
-    echo "<br>";
-    echo $successrate;
-
     $conn->autocommit(TRUE);
     $conn->close();
+    
+    echo "Success";
+    echo "<br>";
+    echo $userId;
+    echo "-";
+    echo $machineId;
+    echo "-";
+    echo $country;
+    echo "-";
+    echo $successrate;
+    echo "-";
 }
 
-if (isset($_GET["userid"]) && isset($_GET["machineid"]) && isset($_GET["successrate"])) {
+if (isset($_GET["userid"]) && isset($_GET["machineid"]) && isset($_GET["country"]) && isset($_GET["successrate"])) {
     $userid = $_GET["userid"];
     $machineId = $_GET["machineid"];
+    $country = $_GET["country"];
     $successrate = $_GET["successrate"];
-    UpdateDataBase($userid, $machineId, $successrate);
+    UpdateDataBase($userid, $machineId, $successrate, $country);
 } else {
     echo "Invalid Request!";
 }
