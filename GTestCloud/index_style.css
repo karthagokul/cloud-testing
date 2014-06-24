@@ -1,0 +1,27 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 24, 2014, 12:57:07 PM
+    Author     : karthgo
+*/
+
+.status-metro {
+    display: inline-block;
+    padding: 2px 5px;
+    color:#fff;
+}
+
+.status-metro.status-good {
+    background: #43c83c;
+}
+
+.status-metro.status-bad {
+    background: #fa3031;
+}
+
+.status-metro.status-fair {
+    background: #999999;
+}
