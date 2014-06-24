@@ -47,7 +47,7 @@ bool CloudClientEngine::submit()
         char urlstr[4096];
 
         strcpy(formatstr,SERVER_URI);
-        sprintf(urlstr,formatstr,"kartha1","44:37:e6:68:96:0c",100);
+        sprintf(urlstr,formatstr,"kartha","44:37:e6:68:96:0c",100,"Korea");
 
         curl_easy_setopt(curl, CURLOPT_URL,urlstr);
 
