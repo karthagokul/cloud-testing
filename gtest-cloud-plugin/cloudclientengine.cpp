@@ -18,6 +18,7 @@
 #include "cloudclientengine.h"
 
 #include <stdio.h>
+#include <string.h>
 
 #define USE_CURL
 
@@ -42,12 +43,11 @@ bool CloudClientEngine::submit()
     CURLcode res;
 
     if(curl) {
-
-        char *data=SERVER_URI;
+        char formatstr[4096];
         char urlstr[4096];
-        sprintf(urlstr,data,"kartha","44:37:e6:68:96:0c",100);
 
-        std::cout<<urlstr<<std::endl;
+        strcpy(formatstr,SERVER_URI);
+        sprintf(urlstr,formatstr,"kartha1","44:37:e6:68:96:0c",100);
 
         curl_easy_setopt(curl, CURLOPT_URL,urlstr);
 
@@ -57,7 +57,6 @@ bool CloudClientEngine::submit()
             std::cerr<<"curl_easy_perform() failed: "<<curl_easy_strerror(res)<<std::endl;
             return false;
         }
-        curl_easy_cleanup(curl);
     }
     else
     {
