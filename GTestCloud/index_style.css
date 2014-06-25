@@ -37,3 +37,11 @@ font-size:150%;
 .colormered {
 color:#FF0000;
 }
+ .ui-dialog-content {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    overflow: auto;
+    padding: 0.5em 1em;
+    position: relative;
+    font-size: 60%;
+}

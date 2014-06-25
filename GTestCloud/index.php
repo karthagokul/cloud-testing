@@ -9,21 +9,39 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>GCloud</title>
         <link href="index_style.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
-        <!-- DataTables CSS -->
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">        
 
         <!-- jQuery -->
         <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 
         <!-- DataTables -->
         <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>   
+
         <script>
             $(document).ready(
                     function() {
                         $('#global_data').DataTable();
+                        $(".moreinfo_dialog").dialog({
+                            autoOpen: false,
+                            height: "auto",
+                            width: "600",
+                            draggable: "true",
+                            title: "More Information",
+                        });
+
                     }
             )
+
+            function onMoreInfoClick(value) {
+                $(".moreinfo_dialog").html(value);
+                $(".moreinfo_dialog").dialog("open");
+            }
+
         </script>
 
     </head>
@@ -47,6 +65,7 @@ and open the template in the editor.
         }
         //
         ?>
+        <div class="moreinfo_dialog"></div>
     <center><span class="boldme iambigger colormered"> Recent Entries </span></center>
     <table id="global_data" class="display">
         <!-- Table Header -->
@@ -67,6 +86,9 @@ and open the template in the editor.
                 <th align="left" data-type="numeric">
                     Date
                 </th>
+                <th align="left">
+                    Details
+                </th>
             </tr>
 
         </thead>
@@ -81,8 +103,9 @@ and open the template in the editor.
                 $country = $row['country'];
                 $successRate = $row['successrate'];
                 $update_date = $row['update_date'];
+                $details = $row['details'];
                 ?>
-                <tr>
+                <tr >
                     <td>
                         <?php echo $userId; ?>
                     </td>
@@ -108,6 +131,15 @@ and open the template in the editor.
                     <td>
                         <?php echo $update_date; ?>
                     </td>
+                    <td style="white-space: normal; width:300px;">
+                        <?php
+                        $out =preg_replace('/\v+|\\\[rn]/','<br/>',$details);
+                        ?>
+                        <script language="javascript" type="text/javascript">
+                            var details = "<?php echo $out; ?>";
+                        </script>
+                        <div onclick="onMoreInfoClick(details);">Click Here</div>
+                    </td>     
                 </tr>
                 <?php
             }

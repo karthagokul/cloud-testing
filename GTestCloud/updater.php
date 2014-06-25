@@ -7,7 +7,7 @@ include_once('./constants.php');
  * @param string $machineId Machine ID
  * @param string $successrate Unit Test Success Rate
  */
-function UpdateDataBase($userId, $machineId, $successrate, $country) {
+function UpdateDataBase($userId, $machineId, $successrate, $country,$details) {
 
     global $DBServer, $DBName, $DBUser, $DBPass;
     $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
@@ -17,7 +17,7 @@ function UpdateDataBase($userId, $machineId, $successrate, $country) {
         exit;
     }
     $date = date('Y-m-d H:i:s');
-    $sql = "INSERT INTO test_data (userid, machineid,successrate,country,update_date) VALUES ('$userId','$machineId','$successrate','$country','$date')";
+    $sql = "INSERT INTO test_data (userid, machineid,successrate,country,details,update_date) VALUES ('$userId','$machineId','$successrate','$country','$details','$date')";
     $rs = $conn->query($sql);
 
     if ($rs === false) {
@@ -28,25 +28,19 @@ function UpdateDataBase($userId, $machineId, $successrate, $country) {
     $conn->autocommit(TRUE);
     $conn->close();
 
-    echo "Success";
-    echo "<br>";
-    echo $userId;
-    echo "-";
-    echo $machineId;
-    echo "-";
-    echo $country;
-    echo "-";
-    echo $successrate;
-    echo "-";
+    echo "Success";  
+    //echo $details;
 }
 
-if (isset($_GET["userid"]) && isset($_GET["machineid"]) && isset($_GET["country"]) && isset($_GET["successrate"])) {
+if (isset($_GET["userid"]) && isset($_GET["machineid"]) && isset($_GET["country"]) && isset($_GET["successrate"]) && isset($_GET["details"])) {
     $userid = $_GET["userid"];
     $machineId = $_GET["machineid"];
     $country = $_GET["country"];
     $successrate = $_GET["successrate"];
-    UpdateDataBase($userid, $machineId, $successrate, $country);
+    $details = $_GET["details"];
+    UpdateDataBase($userid, $machineId, $successrate, $country,$details);
 } else {
-    echo "Invalid Request!";
+    echo "Failed";
+    echo "Please Make Sure that you have all the parameters";
 }
 ?>
