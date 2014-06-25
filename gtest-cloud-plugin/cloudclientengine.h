@@ -22,7 +22,7 @@
 #include <string>
 
 #define USE_CURL
-#define SERVER_URI "http://10.254.84.103:8080/GTestCloud/updater.php?userid=%s&&machineid=%s&&successrate=%f&&country=%s"
+#define SERVER_URI "http://10.254.84.103:8080/GTestCloud/updater.php?userid=%s&&machineid=%s&&successrate=%f&&country=%s&&details=%s"
 
 /**
  * @brief The CloudClientEngine class
@@ -31,28 +31,30 @@ class CloudClientEngine
 {
 public:
     /**
-     * @brief CloudClientEngine
-     * @param aUserName
-     * @param aMACAddress
-     * @param aCountry
+     * @brief CloudClientEngine Creates the Engine
+     * @param aUserName User Name
+     * @param aMACAddress MAC Address as Device ID
+     * @param aCountry Country String
      */
     CloudClientEngine(const std::string &aUserName,const std::string &aMACAddress,const std::string &aCountry);
 
     ~CloudClientEngine();
 
     /**
-     * @brief submit
-     * @param aSuccessrate
-     * @param aDetails
+     * @brief submit Submits the data to the cloud
+     * @param aSuccessrate Success Rate
+     * @param aDetails Details ,such as Error String If Any
      * @return
      */
     bool submit(const double &aSuccessrate,const std::string &aDetails);
 
-#ifdef USE_CURL
 protected:
+#ifdef USE_CURL
     static size_t handle(char * data, size_t size, size_t nmemb, void * p);
     size_t handle_impl(char * data, size_t size, size_t nmemb);
 #endif
+    std::string convertSpaces(const std::string &aStr);
+    std::string convertNewLine(const std::string &aStr);
 
 private:
     std::string mUserName;

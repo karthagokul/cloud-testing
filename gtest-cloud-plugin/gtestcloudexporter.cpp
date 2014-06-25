@@ -54,10 +54,10 @@ void GTestCloudExporter::OnTestStart(const ::testing::TestInfo& test_info)
 
 void GTestCloudExporter::OnTestPartResult(const ::testing::TestPartResult& test_part_result)
 {
-//    std::cerr<<std::endl;
-//    std::cerr<<test_part_result.file_name()<<" Line Number : "<<test_part_result.line_number()<<std::endl;
-//    std::cerr<<test_part_result.summary()<<std::endl;
-//    std::cerr<<std::endl;
+    //    std::cerr<<std::endl;
+    //    std::cerr<<test_part_result.file_name()<<" Line Number : "<<test_part_result.line_number()<<std::endl;
+    //    std::cerr<<test_part_result.summary()<<std::endl;
+    //    std::cerr<<std::endl;
 
     if(!mResultsTable.appendDetails(test_part_result.summary()))
     {

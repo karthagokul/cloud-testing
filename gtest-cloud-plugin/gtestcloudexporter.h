@@ -41,7 +41,7 @@ public:
     ~GTestCloudExporter();
     /**
      * @brief submit
-     * @return
+     * @return True for Success and False for failure
      */
     bool submit();
 

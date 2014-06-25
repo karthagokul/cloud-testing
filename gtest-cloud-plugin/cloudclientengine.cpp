@@ -25,8 +25,10 @@
 #endif
 
 CloudClientEngine::CloudClientEngine(const std::string &aUserName,const std::string &aMACAddress,const std::string &aCountry)
-    :mUserName(aUserName),mDeviceId(aMACAddress),mCountry(aCountry)
 {
+    mUserName=convertSpaces(aUserName);
+    mDeviceId=convertSpaces(aMACAddress);
+    mCountry=convertSpaces(aCountry);
 }
 
 CloudClientEngine::~CloudClientEngine()
@@ -42,7 +44,8 @@ size_t CloudClientEngine::handle(char * data, size_t size, size_t nmemb, void * 
 size_t CloudClientEngine::handle_impl(char* data, size_t size, size_t nmemb)
 {
     std::string response(data);
-    std::cout<<"Server Says"<<response;
+    //std::cout<<"Response is"<<std::endl;
+    //std::cout<<std::endl<<response;
     if (response.find("Success") == 0)
     {
         std::cout<<"Successfully Submitted the Test Results"<<std::endl;
@@ -61,9 +64,13 @@ bool CloudClientEngine::submit(const double &aSuccessrate,const std::string &aDe
     char formatstr[4096];
     char urlstr[4096];
 
-
     strcpy(formatstr,SERVER_URI);
-    sprintf(urlstr,formatstr,mUserName.c_str(),mDeviceId.c_str(),aSuccessrate,mCountry.c_str());
+
+    std::string details=convertSpaces(aDetails);
+    details=convertNewLine(details);
+    std::cout<<details;
+
+    sprintf(urlstr,formatstr,mUserName.c_str(),mDeviceId.c_str(),aSuccessrate,mCountry.c_str(),details.c_str());
 
 #ifdef USE_CURL
     curl_global_init(CURL_GLOBAL_ALL);
@@ -89,16 +96,34 @@ bool CloudClientEngine::submit(const double &aSuccessrate,const std::string &aDe
     }
     curl_global_cleanup();
 
-    if(curl)
-    {
-        delete curl;
-        curl=0;
-    }
-
     return true;
 #else
     std::cerr<<"Not Implemented"<<std::endl;
     return false;
 #endif
 
+}
+
+std::string CloudClientEngine::convertSpaces(const std::string &aStr)
+{
+    std::string result=aStr;
+    for (size_t pos = result.find(' ');
+         pos != std::string::npos;
+         pos = result.find(' ', pos))
+    {
+        result.replace(pos, 1, "%20");
+    }
+    return result;
+}
+
+std::string CloudClientEngine::convertNewLine(const std::string &aStr)
+{
+    std::string result=aStr;
+    for (size_t pos = result.find('\n');
+         pos != std::string::npos;
+         pos = result.find('\n', pos))
+    {
+        result.replace(pos, 1, "%0A");
+    }
+    return result;
 }

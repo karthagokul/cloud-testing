@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
     ::testing::TestEventListeners& listeners = ::testing::UnitTest::GetInstance()->listeners();
     delete listeners.Release(listeners.default_result_printer());
 
-    GTestCloudExporter *cloudexpo=new GTestCloudExporter("gokul@gmail.com","eth0","SKorea");
+    GTestCloudExporter *cloudexpo=new GTestCloudExporter("kagokul@gmail.com","eth0","South Korea");
 
     listeners.Append(cloudexpo);
 
