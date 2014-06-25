@@ -23,12 +23,7 @@ int main(int argc, char** argv) {
     ::testing::TestEventListeners& listeners = ::testing::UnitTest::GetInstance()->listeners();
     delete listeners.Release(listeners.default_result_printer());
 
-    GTestCloudExporter *cloudexpo=new GTestCloudExporter("kartha.gokul@gmail.com","eth0");
-    if(!cloudexpo->init())
-    {
-        std::cerr<<"Failed to Initialise the Cloud Plugin"<<std::endl;
-        return -1;
-    }
+    GTestCloudExporter *cloudexpo=new GTestCloudExporter("gokul@gmail.com","eth0","SKorea");
 
     listeners.Append(cloudexpo);
 

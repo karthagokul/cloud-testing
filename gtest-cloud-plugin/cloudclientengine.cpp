@@ -20,14 +20,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#define USE_CURL
-
 #ifdef USE_CURL
 #include <curl/curl.h>
 #endif
 
-CloudClientEngine::CloudClientEngine(CloudClientEngineObserver *aObserver)
-    :mObserver(aObserver)
+CloudClientEngine::CloudClientEngine(const std::string &aUserName,const std::string &aMACAddress,const std::string &aCountry)
+    :mUserName(aUserName),mDeviceId(aMACAddress),mCountry(aCountry)
 {
 }
 
@@ -35,23 +33,49 @@ CloudClientEngine::~CloudClientEngine()
 {
 }
 
-bool CloudClientEngine::submit()
+#ifdef USE_CURL
+size_t CloudClientEngine::handle(char * data, size_t size, size_t nmemb, void * p)
 {
+    return static_cast<CloudClientEngine*>(p)->handle_impl(data, size, nmemb);
+}
+
+size_t CloudClientEngine::handle_impl(char* data, size_t size, size_t nmemb)
+{
+    std::string response(data);
+    std::cout<<"Server Says"<<response;
+    if (response.find("Success") == 0)
+    {
+        std::cout<<"Successfully Submitted the Test Results"<<std::endl;
+    }
+    else
+    {
+        std::cerr<<"Failed to Submit the Test Results"<<std::endl;
+    }
+
+    return size * nmemb;
+}
+#endif
+
+bool CloudClientEngine::submit(const double &aSuccessrate,const std::string &aDetails)
+{
+    char formatstr[4096];
+    char urlstr[4096];
+
+
+    strcpy(formatstr,SERVER_URI);
+    sprintf(urlstr,formatstr,mUserName.c_str(),mDeviceId.c_str(),aSuccessrate,mCountry.c_str());
+
 #ifdef USE_CURL
     curl_global_init(CURL_GLOBAL_ALL);
     CURL *curl = curl_easy_init();
     CURLcode res;
 
     if(curl) {
-        char formatstr[4096];
-        char urlstr[4096];
-
-        strcpy(formatstr,SERVER_URI);
-        sprintf(urlstr,formatstr,"kartha","44:37:e6:68:96:0c",100,"Korea");
-
         curl_easy_setopt(curl, CURLOPT_URL,urlstr);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &CloudClientEngine::handle);
 
         res = curl_easy_perform(curl);
+
         if(res != CURLE_OK)
         {
             std::cerr<<"curl_easy_perform() failed: "<<curl_easy_strerror(res)<<std::endl;
@@ -70,6 +94,7 @@ bool CloudClientEngine::submit()
         delete curl;
         curl=0;
     }
+
     return true;
 #else
     std::cerr<<"Not Implemented"<<std::endl;

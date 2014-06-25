@@ -22,14 +22,14 @@
 #include <iostream>
 #include <string>
 
-#include "constants.h"
+#include "gtestresults.h"
 #include "cloudclientengine.h"
 
 
 /**
  * @brief The GTestCloudExporter class
  */
-class GTestCloudExporter: public ::testing::EmptyTestEventListener,public CloudClientEngineObserver
+class GTestCloudExporter: public ::testing::EmptyTestEventListener
 {
 public:
     /**
@@ -37,26 +37,24 @@ public:
      * @param aUserName UserName  which is used to access the webserver
      * @param aNetworkInterfaceName Primary Network InterfaceName used
      */
-    GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName);
+    GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName,const std::string &aCountryName);
     ~GTestCloudExporter();
-    bool init();
+    /**
+     * @brief submit
+     * @return
+     */
     bool submit();
-
 
     //Overriden from Listner
 protected:
     virtual void OnTestStart(const ::testing::TestInfo& test_info);
     virtual void OnTestPartResult(const ::testing::TestPartResult& test_part_result);
     virtual void OnTestEnd(const ::testing::TestInfo& test_info);
-    void onCloudClientError(const CloudClientEngineError &aStatus , const std::string &aErrorMessage);
 
 private:
     int mSuccessCount;
     int mFailedCount;
-    std::string mUserName;
-    std::string mDeviceId;
     CloudClientEngine *mCloudEngine;
-
     GTestResults mResultsTable;
 
 };

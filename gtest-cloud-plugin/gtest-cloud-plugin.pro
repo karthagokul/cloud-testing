@@ -17,10 +17,11 @@ else {
 SOURCES += \
     gtestcloudexporter.cpp \
     sysutils.cpp \
-    cloudclientengine.cpp
+    cloudclientengine.cpp \
+    gtestresults.cpp
 
 HEADERS += \
     gtestcloudexporter.h \
     sysutils.h \
     cloudclientengine.h \
-    constants.h
+    gtestresults.h

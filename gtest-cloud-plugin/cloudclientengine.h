@@ -21,30 +21,44 @@
 #include <iostream>
 #include <string>
 
-#define SERVER_URI "http://10.254.84.103:8080/GTestCloud/updater.php?userid=%s&&machineid=%s&&successrate=%d&&country=%s"
+#define USE_CURL
+#define SERVER_URI "http://10.254.84.103:8080/GTestCloud/updater.php?userid=%s&&machineid=%s&&successrate=%f&&country=%s"
 
-enum CloudClientEngineError
-{
-    CloudUnabletoConnect,
-    CloudUnabletoPost,
-    CloudWrongMessageFormat
-};
-
-class CloudClientEngineObserver
-{
-public:
-    virtual void onCloudClientError(const CloudClientEngineError &aStatus , const std::string &aErrorMessage)=0;
-};
-
+/**
+ * @brief The CloudClientEngine class
+ */
 class CloudClientEngine
 {
 public:
-    CloudClientEngine(CloudClientEngineObserver *aObserver);
+    /**
+     * @brief CloudClientEngine
+     * @param aUserName
+     * @param aMACAddress
+     * @param aCountry
+     */
+    CloudClientEngine(const std::string &aUserName,const std::string &aMACAddress,const std::string &aCountry);
+
     ~CloudClientEngine();
-    bool submit();
+
+    /**
+     * @brief submit
+     * @param aSuccessrate
+     * @param aDetails
+     * @return
+     */
+    bool submit(const double &aSuccessrate,const std::string &aDetails);
+
+#ifdef USE_CURL
+protected:
+    static size_t handle(char * data, size_t size, size_t nmemb, void * p);
+    size_t handle_impl(char * data, size_t size, size_t nmemb);
+#endif
 
 private:
-    CloudClientEngineObserver *mObserver;
+    std::string mUserName;
+    std::string mDeviceId;
+    std::string mCountry;
+
 };
 
 #endif // CLOUDCLIENTENGINE_H

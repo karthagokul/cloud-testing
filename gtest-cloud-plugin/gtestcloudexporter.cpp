@@ -18,21 +18,18 @@
 #include "gtestcloudexporter.h"
 #include "sysutils.h"
 
-GTestCloudExporter::GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName):
-    mSuccessCount(0),mFailedCount(0),mUserName(aUserName),mCloudEngine(0)
+GTestCloudExporter::GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName,const std::string &aCountryName):
+    mSuccessCount(0),mFailedCount(0)
 {
-    mDeviceId=SysUtils::getMACAddress(aNetworkInterfaceName);
-    if(mDeviceId.empty())
+    std::string deviceId;
+    deviceId=SysUtils::getMACAddress(aNetworkInterfaceName);
+    if(deviceId.empty())
     {
         std::cerr<<"Device ID Is Empty "<<std::endl;
+        deviceId="UnKnown";
     }
-    else
-    {
-        std::cout<<"-----------------------------------"<<std::endl;
-        std::cout<<"UserName : "<<mUserName<<std::endl;
-        std::cout<<"Device ID : "<<mDeviceId<<std::endl;
-        std::cout<<"-----------------------------------"<<std::endl;
-    }
+    mCloudEngine=new CloudClientEngine(aUserName,deviceId,aCountryName);
+
 
 }
 
@@ -44,15 +41,6 @@ GTestCloudExporter::~GTestCloudExporter()
         delete mCloudEngine;
         mCloudEngine=0;
     }
-}
-
-bool GTestCloudExporter::init()
-{
-    //  std::cout<<__PRETTY_FUNCTION__<<std::endl;
-    if(mCloudEngine) return false;
-
-    mCloudEngine=new CloudClientEngine(this);
-    return true;
 }
 
 void GTestCloudExporter::OnTestStart(const ::testing::TestInfo& test_info)
@@ -87,15 +75,9 @@ void GTestCloudExporter::OnTestEnd(const ::testing::TestInfo& test_info)
 
 bool GTestCloudExporter::submit()
 {
-    mResultsTable.print();
     bool status=true;
 
-    //status=mCloudEngine->submit();
+    status=mCloudEngine->submit(mResultsTable.getSuccessRate(),mResultsTable.printToString());
 
     return status;
-}
-
-void GTestCloudExporter::onCloudClientError(const CloudClientEngineError &aStatus , const std::string &aErrorMessage)
-{
-
 }
