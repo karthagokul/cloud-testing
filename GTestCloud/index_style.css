@@ -8,6 +8,20 @@ and open the template in the editor.
     Author     : karthgo
 */
 
+body{
+    /* IE10 Consumer Preview */ 
+    background-image: -ms-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #A3EFE5 100%);
+    /* Mozilla Firefox */ 
+    background-image: -moz-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #A3EFE5 100%);
+    /* Opera */ 
+    background-image: -o-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #A3EFE5 100%);
+    /* Webkit (Safari/Chrome 10) */ 
+    background-image: -webkit-gradient(radial, center center, 0, center center, 506, color-stop(0, #FFFFFF), color-stop(1, #A3EFE5));
+    /* Webkit (Chrome 11+) */ 
+    background-image: -webkit-radial-gradient(center, circle farthest-corner, #FFFFFF 0%, #A3EFE5 100%);
+    /* W3C Markup, IE10 Release Preview */ 
+    background-image: radial-gradient(circle farthest-corner at center, #FFFFFF 0%, #A3EFE5 100%);
+}
 .status-metro {
     display: inline-block;
     padding: 2px 5px;
@@ -26,18 +40,18 @@ and open the template in the editor.
     background: #999999;
 }
 .boldme {
-font-weight:bold;
+    font-weight:bold;
 }
 .italicme {
-font-style:italic;
+    font-style:italic;
 }
 .iambigger {
-font-size:150%;
+    font-size:150%;
 }
 .colormered {
-color:#FF0000;
+    color:#FF0000;
 }
- .ui-dialog-content {
+.ui-dialog-content {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
     overflow: auto;
@@ -90,7 +104,7 @@ color:#FF0000;
     margin-top: 10px;
     font-weight: bold;
 }
-.elegant-aero input[type="text"], .elegant-aero input[type="email"], .elegant-aero textarea, .elegant-aero select {
+.elegant-aero input[type="password"],input[type="text"], .elegant-aero input[type="email"], .elegant-aero textarea, .elegant-aero select {
     color: #888;
     width: 65%;
     padding: 5px 4px 0px 5px;
@@ -104,15 +118,16 @@ color:#FF0000;
     box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
     font: 200 24px/24px Arial, Helvetica, sans-serif;
 }
+
 .elegant-aero textarea{
     height:100px;
 }
 .elegant-aero select {
     background: #fbfbfb url('down-arrow.png') no-repeat right;
     background: #fbfbfb url('down-arrow.png') no-repeat right;
-   appearance:none;
+    appearance:none;
     -webkit-appearance:none; 
-   -moz-appearance: none;
+    -moz-appearance: none;
     text-indent: 0.01px;
     text-overflow: '';
     width: 67%;
@@ -125,4 +140,15 @@ color:#FF0000;
 }
 .elegant-aero .button:hover{
     background: #3EB1DD;
+}
+
+.aero_para {
+    font: 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #005CB9;
+}
+
+.aero_para_bold {
+    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #005CB9;
+    font-size: 200%;
 }

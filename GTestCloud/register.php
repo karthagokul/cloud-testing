@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>User registration form</title>
+        <title>GTest Cloud Web Registration</title>
         <link href="index_style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>    

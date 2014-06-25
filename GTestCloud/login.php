@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Login</title>
+        <title>GTest Cloud Web Login</title>
         <link href="index_style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>

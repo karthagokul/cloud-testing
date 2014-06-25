@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>GCloud</title>
+        <title>GTest Cloud User Home</title>
         <link href="index_style.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">        
 
@@ -50,17 +50,17 @@ and open the template in the editor.
         include_once('./constants.php');
         global $DBServer, $DBName, $DBUser, $DBPass;
         $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
-        session_start(); 
-        $user=$_SESSION['username'];
+        session_start();
+        $user = $_SESSION['username'];
         if ($conn->connect_error) {
             trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);
         }
-        
+
         //Let's check whether he is an admin if so show everything or else specific to the user
-        if($user=="admin")
+        if ($user == "admin")
             $sql = "SELECT * FROM test_data";
         else
-            $sql="SELECT * FROM `test_data` WHERE userid = '$user' ORDER BY `update_date` DESC ";
+            $sql = "SELECT * FROM `test_data` WHERE userid = '$user' ORDER BY `update_date` DESC ";
         $rs = $conn->query($sql);
 
         if ($rs === false) {
@@ -138,7 +138,7 @@ and open the template in the editor.
                     </td>
                     <td style="white-space: normal; width:300px;">
                         <?php
-                        $out =preg_replace('/\v+|\\\[rn]/','<br/>',$details);
+                        $out = preg_replace('/\v+|\\\[rn]/', '<br/>', $details);
                         ?>
                         <script language="javascript" type="text/javascript">
                             var details = "<?php echo $out; ?>";
