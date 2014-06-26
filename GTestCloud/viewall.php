@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+ Copyright (C) <2014>  Gokul Kartha <kartha.gokul@gmail.com>
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <html>
     <head>
@@ -19,29 +30,12 @@ and open the template in the editor.
         <!-- DataTables CSS -->
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
 
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>   
-
         <script>
             $(document).ready(
                     function() {
                         $('#global_data').DataTable();
-                        $(".moreinfo_dialog").dialog({
-                            autoOpen: false,
-                            height: "auto",
-                            width: "600",
-                            draggable: "true",
-                            title: "More Information",
-                        });
-
                     }
             )
-
-            function onMoreInfoClick(value) {
-                $(".moreinfo_dialog").html(value);
-                $(".moreinfo_dialog").dialog("open");
-            }
-
         </script>
 
     </head>
@@ -52,6 +46,9 @@ and open the template in the editor.
         $conn = new mysqli($DBServer, $DBUser, $DBPass, $DBName);
         session_start();
         $user = $_SESSION['username'];
+        ?>
+        <p class="aero_info"><?php echo "You have Logged in as $user"; ?> | <a href="completelog.php">View Complete Log</a> | <a href="logout.php">Logout</a> </p>
+        <?php
         if ($conn->connect_error) {
             trigger_error('Database connection failed: ' . $conn->connect_error, E_USER_ERROR);
         }
@@ -70,8 +67,9 @@ and open the template in the editor.
         }
         //
         ?>
+        <br></br>
         <div class="moreinfo_dialog"></div>
-    <center><span class="boldme iambigger colormered"> Recent Entries </span></center>
+    <center><p class="aero_para_bold"> Recent Entries </p></center>
     <table id="global_data" class="display">
         <!-- Table Header -->
         <thead>
@@ -90,9 +88,6 @@ and open the template in the editor.
                 </th>
                 <th align="left" data-type="numeric">
                     Date
-                </th>
-                <th align="left">
-                    Details
                 </th>
             </tr>
 
@@ -135,16 +130,7 @@ and open the template in the editor.
                     </td>
                     <td>
                         <?php echo $update_date; ?>
-                    </td>
-                    <td style="white-space: normal; width:300px;">
-                        <?php
-                        $out = preg_replace('/\v+|\\\[rn]/', '<br/>', $details);
-                        ?>
-                        <script language="javascript" type="text/javascript">
-                            var details = "<?php echo $out; ?>";
-                        </script>
-                        <div onclick="onMoreInfoClick(details);">Click Here</div>
-                    </td>     
+                    </td>   
                 </tr>
                 <?php
             }

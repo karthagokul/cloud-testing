@@ -63,17 +63,18 @@ body{
 /* Elegant Aero */
 .elegant-aero {
     width: 400px;
+    margin-top:100px;
     margin-right: auto;
     margin-left: auto;
     background: #DDF0F8;
     padding: 30px 30px 20px 30px;
     box-shadow: #868686 0 0px 10px -1px;
     -webkit-box-shadow: #868686 0 0px 10px -1px;
-    font: 12px Arial, Helvetica, sans-serif;
+    font: 12px Tahoma, Geneva, sans-serif;
     color: #666;
 }
 .elegant-aero  h1{
-    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font: 24px Tahoma, Geneva, sans-serif;
     padding: 20px 10px 20px 30px;
     display: block;
     background: #D0E6F0;
@@ -104,6 +105,21 @@ body{
     margin-top: 10px;
     font-weight: bold;
 }
+
+.elegant-aero input[type=submit] {
+    padding:5px 15px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: bold;
+}
+
 .elegant-aero input[type="password"],input[type="text"], .elegant-aero input[type="email"], .elegant-aero textarea, .elegant-aero select {
     color: #888;
     width: 65%;
@@ -116,7 +132,7 @@ body{
     outline: 0;
     -webkit-box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
     box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
-    font: 200 24px/24px Arial, Helvetica, sans-serif;
+    font: 14px Tahoma, Geneva, sans-serif;
 }
 
 .elegant-aero textarea{
@@ -142,13 +158,34 @@ body{
     background: #3EB1DD;
 }
 
+.aero_info {
+    color: #333333;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 80%;
+    color: #005CB9;
+}
+
+.aero_log {
+    background-color: #FFFFFF;
+    padding: 4px;
+    color: #606060;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 60%;
+}
+
 .aero_para {
-    font: 14px "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #333333;
+    font-family: Tahoma, Geneva, sans-serif;
     color: #005CB9;
 }
 
 .aero_para_bold {
-    font: 24px "Trebuchet MS", Arial, Helvetica, sans-serif;
-    color: #005CB9;
-    font-size: 200%;
+    font: 24px Tahoma, Geneva, sans-serif;
+    padding: 20px 10px 20px 30px;
+    display: block;
+    background: #D0E6F0;
+    margin-top: -30px;
+    margin-left: -30px;
+    margin-right: -30px;
+    border-bottom: 1px solid #B9E1F1;
 }

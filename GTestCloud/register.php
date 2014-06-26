@@ -1,18 +1,33 @@
+<!--
+ Copyright (C) <2014>  Gokul Kartha <kartha.gokul@gmail.com>
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <html>
     <head>
         <title>GTest Cloud Web Registration</title>
         <link href="index_style.css" rel="stylesheet" type="text/css" />
     </head>
     <body>    
+        <p class="aero_info"><a href="index.php">Home</a> </p>
         <?php
         require_once("constants.php");
         if (!isset($_POST['submit'])) {
             ?>    <!-- The HTML registration form -->
 
             <form class="elegant-aero" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
-                <h1>Register
-                    <span>Please fill all the texts in the fields.</span>
-                </h1>
+                <center><h1>GTest Cloud Registration </h1></center>
                 <label>
                     <span>Username</span>
                     <input type="text" name="username" />

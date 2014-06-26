@@ -53,6 +53,7 @@ size_t CloudClientEngine::handle_impl(char* data, size_t size, size_t nmemb)
     else
     {
         std::cerr<<"Failed to Submit the Test Results"<<std::endl;
+        std::cout<<std::endl<<response;
     }
 
     return size * nmemb;
@@ -68,7 +69,7 @@ bool CloudClientEngine::submit(const double &aSuccessrate,const std::string &aDe
 
     std::string details=convertSpaces(aDetails);
     details=convertNewLine(details);
-    std::cout<<details;
+    //std::cout<<details;
 
     sprintf(urlstr,formatstr,mUserName.c_str(),mDeviceId.c_str(),aSuccessrate,mCountry.c_str(),details.c_str());
 
