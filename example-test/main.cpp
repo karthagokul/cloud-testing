@@ -41,6 +41,7 @@ int main(int argc, char** argv) {
     int value=RUN_ALL_TESTS();
 
     //Now we need to submit the results we have gathered to the cloud webserver ,So let's do it !
+    std::cout<<"Trying to Submit the results to cloud"<<std::endl;
     if(!cloudexpo->submit())
     {
         std::cerr<<"Failed to Submit the data to server"<<std::endl;

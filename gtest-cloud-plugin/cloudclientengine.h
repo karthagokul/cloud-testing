@@ -22,7 +22,7 @@
 #include <string>
 
 #define USE_CURL
-#define SERVER_URI "http://10.254.84.103:8080/GTestCloud/updater.php?userid=%s&&machineid=%s&&successrate=%f&&country=%s&&details=%s"
+#define SERVER_URI "http://192.168.97.15/GTestCloud/updater.php?userid=%s&&machineid=%s&&successrate=%f&&country=%s&&details=%s"
 
 /**
  * @brief The CloudClientEngine class
