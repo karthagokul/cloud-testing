@@ -17,25 +17,44 @@
 
 #include "gtestcloudexporter.h"
 #include "sysutils.h"
+#include "iniReader/C++/iniReader.h"
 
-GTestCloudExporter::GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName,const std::string &aCountryName):
+GTestCloudExporter::GTestCloudExporter():
     mSuccessCount(0),mFailedCount(0)
 {
-    std::string deviceId;
-    deviceId=SysUtils::getMACAddress(aNetworkInterfaceName);
+}
+
+bool GTestCloudExporter::init(const char *aConfigFile)
+{
+    if(!parseIniFile(aConfigFile))
+    {
+        std::cerr<<"Unable to find the file"<<std::endl;
+        return false;
+    }
+    std::string username=getOptionToString("username");
+    std::string networkiFace=getOptionToString("network_interface");
+    std::string country=getOptionToString("country");
+
+    if(username.empty()||networkiFace.empty()||country.empty())
+    {
+        std::cerr<<"Unable to Fetch all the required fields from the conf file"<<std::endl;
+        return false;
+    }
+    std::string deviceId=SysUtils::getMACAddress(networkiFace);
     if(deviceId.empty())
     {
-        std::cerr<<"Device ID Is Empty "<<std::endl;
-        deviceId="UnKnown";
+        std::cerr<<"Device ID Is Empty ;Please check the interface name provided "<<std::endl;
+        return false;
     }
-    mCloudEngine=new CloudClientEngine(aUserName,deviceId,aCountryName);
 
+    //If everything goes well, lets create the back end engine
+    mCloudEngine=new CloudClientEngine(username,deviceId,country);
+    return true;
 
 }
 
 GTestCloudExporter::~GTestCloudExporter()
 {
-    //std::cout<<__PRETTY_FUNCTION__<<std::endl;
     if(mCloudEngine)
     {
         delete mCloudEngine;
@@ -45,7 +64,6 @@ GTestCloudExporter::~GTestCloudExporter()
 
 void GTestCloudExporter::OnTestStart(const ::testing::TestInfo& test_info)
 {
-    //std::cout<<"Running\t"<<test_info.test_case_name()<<"::"<<test_info.name()<<std::endl;
     std::string name=std::string(test_info.test_case_name());
     name.append("::");
     name.append(std::string(test_info.name()));
@@ -54,21 +72,15 @@ void GTestCloudExporter::OnTestStart(const ::testing::TestInfo& test_info)
 
 void GTestCloudExporter::OnTestPartResult(const ::testing::TestPartResult& test_part_result)
 {
-    //    std::cerr<<std::endl;
-    //    std::cerr<<test_part_result.file_name()<<" Line Number : "<<test_part_result.line_number()<<std::endl;
-    //    std::cerr<<test_part_result.summary()<<std::endl;
-    //    std::cerr<<std::endl;
-
     if(!mResultsTable.appendDetails(test_part_result.summary()))
     {
         std::cerr<<"Unable to Append";
-        exit;
+        exit(-1);
     }
 }
 
 void GTestCloudExporter::OnTestEnd(const ::testing::TestInfo& test_info)
 {
-    //std::cout<<test_info.test_case_name()<<"::"<<test_info.name()<<"\t";
     mResultsTable.updateSuccess(test_info.result()->Passed());
 
 }

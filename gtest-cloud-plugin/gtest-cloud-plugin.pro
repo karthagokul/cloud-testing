@@ -18,10 +18,12 @@ SOURCES += \
     gtestcloudexporter.cpp \
     sysutils.cpp \
     cloudclientengine.cpp \
-    gtestresults.cpp
+    gtestresults.cpp \
+    iniReader/C++/iniReader.c++
 
 HEADERS += \
     gtestcloudexporter.h \
     sysutils.h \
     cloudclientengine.h \
-    gtestresults.h
+    gtestresults.h \
+    iniReader/C++/iniReader.h

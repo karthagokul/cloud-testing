@@ -23,7 +23,13 @@ int main(int argc, char** argv) {
     ::testing::TestEventListeners& listeners = ::testing::UnitTest::GetInstance()->listeners();
     delete listeners.Release(listeners.default_result_printer());
 
-    GTestCloudExporter *cloudexpo=new GTestCloudExporter("kartha.gokul@yahoo.com","eth0","South Korea");
+    //Make sure that you have the
+    GTestCloudExporter *cloudexpo=new GTestCloudExporter();
+    if(!cloudexpo->init("gcloud.ini"))
+    {
+        std::cerr<<"Initing Failed"<<std::endl;
+        return -1;
+    }
 
     listeners.Append(cloudexpo);
 

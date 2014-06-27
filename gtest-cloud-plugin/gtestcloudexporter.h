@@ -37,8 +37,17 @@ public:
      * @param aUserName UserName  which is used to access the webserver
      * @param aNetworkInterfaceName Primary Network InterfaceName used
      */
-    GTestCloudExporter(const std::string &aUserName,const std::string &aNetworkInterfaceName,const std::string &aCountryName);
+    GTestCloudExporter();
+
+    /**
+     * @brief init Inits the plugin with a configuration where the necessary information is provided
+     * @param aFileLocation Configuration file name
+     * @return True for success false for failure
+     */
+    bool init(const char *aFileLocation);
+
     ~GTestCloudExporter();
+
     /**
      * @brief submit
      * @return True for Success and False for failure
@@ -50,7 +59,6 @@ protected:
     virtual void OnTestStart(const ::testing::TestInfo& test_info);
     virtual void OnTestPartResult(const ::testing::TestPartResult& test_part_result);
     virtual void OnTestEnd(const ::testing::TestInfo& test_info);
-
 private:
     int mSuccessCount;
     int mFailedCount;

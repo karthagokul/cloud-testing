@@ -33,6 +33,7 @@ CloudClientEngine::CloudClientEngine(const std::string &aUserName,const std::str
 
 CloudClientEngine::~CloudClientEngine()
 {
+
 }
 
 #ifdef USE_CURL

@@ -27,7 +27,7 @@
             ?>    <!-- The HTML registration form -->
 
             <form class="elegant-aero" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
-                <center><h1>GTest Cloud Registration </h1></center>
+                <center><h1>GTest Cloud Registration </h1></center>              
                 <label>
                     <span>Username</span>
                     <input type="text" name="username" />

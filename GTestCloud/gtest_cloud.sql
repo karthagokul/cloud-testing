@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2014 at 12:38 PM
+-- Generation Time: Jun 27, 2014 at 11:34 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -40,28 +40,12 @@ CREATE TABLE IF NOT EXISTS `test_data` (
 --
 
 INSERT INTO `test_data` (`userid`, `machineid`, `successrate`, `country`, `details`, `update_date`) VALUES
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'SKorea', 'CalculatorTest::cublic', '2014-06-25 11:10:49'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'SKorea', 'CalculatorTest::cublic [ Success ]', '2014-06-25 11:17:15'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]', '2014-06-25 11:17:42'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:19:41'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:20:24'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:20:27'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:21:05'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:30:26'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:30:27'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:30:27'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:30:28'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:30:28'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ] CalculatorTest::multiply [ Failed ] Value of: c2.multiply(10,35)   Actual: 350 Expected: 1000.00 Which is: 1000 ', '2014-06-25 11:30:29'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 12:37:06'),
-('gokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 12:37:39'),
-('kagokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 12:37:42'),
-('kagokul@gmail.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 12:38:30'),
-('kartha.gokul@yahoo.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 13:55:39'),
-('kartha.gokul@yahoo.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 14:01:39'),
-('kartha.gokul@yahoo.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 14:01:40'),
-('kartha.gokul@yahoo.com', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-25 14:01:40'),
-('kartha.gokul@yahoo.com', '10:09:3D:12:33:33', 100, 'korea', 'hello', '2014-06-26 11:29:23');
+('kartha.gokul', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-27 11:30:02'),
+('kartha.gokul', '10:09:3D:12:33:33', 100, 'korea', 'test_from_browser', '2014-06-27 11:30:54'),
+('kartha.gokul', '10:09:3D:12:33:33', 70, 'korea', 'test_from_browser', '2014-06-27 11:31:03'),
+('kartha.gokul', '10:09:3D:12:33:33', 98, 'korea', 'test_from_browser', '2014-06-27 11:31:12'),
+('kartha.gokul', '00:0C:29:54:42:12', 50, 'South Korea', 'CalculatorTest::cublic [ Success ]\nCalculatorTest::multiply [ Failed ]\nValue of: c2.multiply(10,35)\n  Actual: 350\nExpected: 1000.00\nWhich is: 1000\n', '2014-06-27 11:32:30'),
+('kartha.gokul', '10:09:3D:12:33:33', 98, 'korea', 'test_from_browser', '2014-06-27 11:32:37');
 
 -- --------------------------------------------------------
 
@@ -79,18 +63,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
-(1, 'kartha.gokul@yahoo.com', 'gokul123', 'Gokul', 'Kartha', 'kartha.gokul@yahoo.com'),
-(2, 'everyourgokul@gmail.com', 'gokul123', '', '', ''),
-(3, 'everyourgokul1@gmail.com', '', 'go', 'ff', 'everyourgokul@gmail.com'),
-(4, '1everyourgokul1@gmail.com', '', 'go', 'ff', '1everyourgokul1@gmail.com'),
-(5, 'admin', 'admin', 'Admin', 'Admin', 'admin@system.com');
+(6, 'admin', 'admin', 'Admin', 'GTest', 'admin@gtest.com'),
+(7, 'kartha.gokul', 'gokul123', 'Gokul', 'Kartha', 'kartha.gokul@gmail.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
