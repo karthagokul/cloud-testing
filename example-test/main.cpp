@@ -21,20 +21,26 @@
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
     ::testing::TestEventListeners& listeners = ::testing::UnitTest::GetInstance()->listeners();
+    //Lets remove all the default listners
     delete listeners.Release(listeners.default_result_printer());
 
-    //Make sure that you have the
+    //Creates our own Cloud Plugin which gets the Test Events
     GTestCloudExporter *cloudexpo=new GTestCloudExporter();
+
+    //Inits it and provides the ini file
     if(!cloudexpo->init("gcloud.ini"))
     {
         std::cerr<<"Initing Failed"<<std::endl;
         return -1;
     }
 
+    //add it to the Google Testing Framework
     listeners.Append(cloudexpo);
 
+    //Let's run all of the tests
     int value=RUN_ALL_TESTS();
 
+    //Now we need to submit the results we have gathered to the cloud webserver ,So let's do it !
     if(!cloudexpo->submit())
     {
         std::cerr<<"Failed to Submit the data to server"<<std::endl;

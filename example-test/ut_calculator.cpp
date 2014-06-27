@@ -33,5 +33,23 @@ TEST(CalculatorTest, multiply)
     EXPECT_EQ(200, c1.multiply(10,20));
 
     Calculator<float> c2;
-    EXPECT_EQ(1000.00, c2.multiply(10,35));
+    EXPECT_EQ(350.00, c2.multiply(10,35));
+}
+
+TEST(CalculatorTest, sum)
+{
+    Calculator<int> c1;
+    EXPECT_EQ(30, c1.sum(10,20));
+
+    Calculator<float> c2;
+    EXPECT_EQ(45, c2.sum(10,35));
+}
+
+TEST(CalculatorTest, divide)
+{
+    Calculator<int> c1;
+    EXPECT_EQ(2, c1.divide(20,10));
+
+    Calculator<float> c2;
+    EXPECT_EQ(5, c2.divide(35,7));
 }

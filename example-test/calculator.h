@@ -33,6 +33,16 @@ public:
     {
         return a*b;
     }
+
+    Type sum(Type a,Type b)
+    {
+        return a+b;
+    }
+
+    Type divide(Type a,Type b)
+    {
+        return a/b;
+    }
 };
 
 #endif // CALCULATOR_H
