@@ -7,18 +7,17 @@
 class PartitionMan
 {
 public:
-    PartitionMan();
-    void start();
+    void process();
+    void push(std::vector<int> aVecData);
+
 private:
     int sumFromTo(int aStart,int aEnd);
-    int currentResultSum();
-    int findOriginalSum();
+    int findCurrentSum();
+    int computeOptimal();
 
-public:
-    void printPermutations();
 private:
-    int mTotal;
-    std::vector<int> mOriginalData;
+    std::vector<int> mCurrentData;
+    std::vector<std::vector<int> > mData;
 };
 
 #endif // PARTITIONMAN_H
