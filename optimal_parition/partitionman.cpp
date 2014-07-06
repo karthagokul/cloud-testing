@@ -1,11 +1,26 @@
 #include "partitionman.h"
 
+#include<vector>
+#include<algorithm>
+
 PartitionMan::PartitionMan()
 {
-    mTotal=800;
-    mOriginalData.push_back(500);
-    mOriginalData.push_back(200);
-    mOriginalData.push_back(100);
+    mTotal=100;
+    mOriginalData.push_back(30);
+    mOriginalData.push_back(40);
+    mOriginalData.push_back(10);
+    mOriginalData.push_back(20);
+
+}
+
+void PartitionMan::printPermutations()
+{
+
+    do{
+         std::cout<<mOriginalData[0]<<" "<<mOriginalData[1]<<" "<<mOriginalData[2]<<std::endl;;
+     }
+
+     while(std::next_permutation(mOriginalData.begin(),mOriginalData.end()));
 }
 
 int PartitionMan::sumFromTo(int aStart,int aEnd)
@@ -15,58 +30,41 @@ int PartitionMan::sumFromTo(int aStart,int aEnd)
     {
         sum+=mOriginalData[j];
     }
-    //std::cout<<" From "<<aStart<<" : "<<aEnd<<" Sum is "<<sum<<std::endl;
     return sum;
 }
 
-int PartitionMan::currentResultSum()
+
+int PartitionMan::findOriginalSum()
 {
     int sum=0;
 
-    for (int i=0;i<mResults.size()-1;i++)
-    {
-        //std::cout<<mResults[i]<<std::endl;
-        sum+=sumFromTo(i,mResults.size());
-    }
-    return sum;
-}
-
-int PartitionMan::findOriginalSum(int index)
-{
-    int sum=0;
-
-    for(int j=index;j<mOriginalData.size();j++)
-    {
-    int tmp=mOriginalData[j+1];
-    mOriginalData[j+1]=mOriginalData[j];
-    mOriginalData[j]=tmp;
     for (int i=0;i<mOriginalData.size()-1;i++)
     {
-        //std::cout<<mOriginalData[i]<<std::endl;
         sum+=sumFromTo(i,mOriginalData.size());
     }
-    std::cout<<"Sum is "<<sum<<std::endl;
-    }
-    return sum;
+
+   return sum;
 }
 
 void PartitionMan::start()
 {
     std::cout<<std::endl;
-
-    //Lets assign the results
-    mResults=mOriginalData;
-
-    for(int i=0;i<mOriginalData.size()-1;i++)
+    int sum=findOriginalSum();
+    do
     {
-        int sum=findOriginalSum(i);
-        if(sum<currentResultSum())
-        {
-            mResults=mOriginalData;
-        }
+        int cursum=findOriginalSum();
 
-    }
+        /*for( std::vector<int>::const_iterator i = mOriginalData.begin(); i != mOriginalData.end(); ++i)
+            std::cout << *i << ' '<<std::endl;
+*/
+        std::cout<<"Permutation Sum is "<<cursum<<" And Results sum is "<<sum<<std::endl;
 
+        if(sum>cursum)
+            sum=cursum;
+
+    } while(std::next_permutation(mOriginalData.begin(),mOriginalData.end()));
+
+    std::cout<<"Optimal Sum is "<<sum;
     std::cout<<std::endl;
 }
 

@@ -12,11 +12,13 @@ public:
 private:
     int sumFromTo(int aStart,int aEnd);
     int currentResultSum();
-    int findOriginalSum(int index);
+    int findOriginalSum();
+
+public:
+    void printPermutations();
 private:
     int mTotal;
     std::vector<int> mOriginalData;
-    std::vector<int> mResults;
 };
 
 #endif // PARTITIONMAN_H
