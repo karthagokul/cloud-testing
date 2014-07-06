@@ -48,7 +48,7 @@ void PartitionMan::push(std::vector<int> aVecData)
 
 void PartitionMan::process()
 {
-    //std::cout<<"Output"<<std::endl;
+    std::cout<<"Results ( Optimal Effort ) for the Input Provided "<<std::endl;
     for(int i=0;i<(int)mData.size();i++)
     {
         //Fetch the data and process it ;
